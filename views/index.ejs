@@ -5,30 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+  div{
+    color: green;
+    text-align: center;
+    background-color: rgb(250, 243, 243);
+  }
+  </style>
 </head>
 <body>
-  <div style="text-align: center; background-color:rgb(250, 243, 243); color: green">
+  <div >
 
+  
     <h1>Ajax</h1>
     <h3>Hello  Arshiya</h3>
-    <button id="button">Click</button>
+    <button id="button">Click</button><small id="loading"></small>
   </div>
 
 <script>
 
 document.addEventListener("DOMContentLoaded", (event)=>{
+  document.getElementById("loading").innerHTML="Loading ........." ;
+
   let clickevent=(event)=>{
+
    let httpreq=new XMLHttpRequest();
+   httpRequest.addEventListener("progress", ()=>console.log("progress"));
+             httpRequest.addEventListener("load", ()=>{  
+                 //NOT working
+                    document.getElementById("loading").innerHTML="Loading ........." ;
+                    console.log("load")
+                });
+             httpRequest.addEventListener("loadend", ()=>{
+                document.getElementById("loading").innerHTML=" ";
+                 console.log("loadend");
+                });
+             httpRequest.addEventListener("error", ()=>console.log("error"));
+             httpRequest.addEventListener("abort", ()=>console.log("abort"));
    httpreq.onreadystatechange=(event)=>{
      if(httpreq.readyState===XMLHttpRequest.DONE){
      if(httpreq.status===200){
-      alert(httpreq.responseText);
+     // alert(httpreq.responseText);
+      let div=document.createElement('h1');
+      let text=document.createTextNode(httpreq.responseText);
+      div.append(text);
+      document.body.appendChild(div); 
+      document.getElementById("loading").innerHTML=" " ;
+ 
      }else{
        alert("error");
      }
      }
    }
-   httpreq.open('GET', "make")
+   httpreq.open('GET', "make",false)
    httpreq.send();
   }
   document.getElementById("button").addEventListener("click", clickevent);

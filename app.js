@@ -23,9 +23,11 @@ app.get('/', (req,res)=>{
   res.render('index');
 })
 app.get('/make', (req,res)=>{
-  res.send('Hello Arshiya!'); 
+ // res.send('Hello Arshiya!'); 
   //res.status(404).end();
- 
+ setTimeout(()=>{
+  res.send('Hello Arshiya!');
+ },4000);
 });
 
 
