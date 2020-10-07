@@ -1,11 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div style="text-align: center; background-color:rgb(250, 243, 243); color: green">
+
+    <h1>Ajax</h1>
+    <h3>Hello  Arshiya</h3>
+    <button id="button">Click</button>
+  </div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", (event)=>{
+  let clickevent=(event)=>{
+   let httpreq=new XMLHttpRequest();
+   httpreq.onreadystatechange=(event)=>{
+     if(httpreq.readyState===XMLHttpRequest.DONE){
+     if(httpreq.status===200){
+      alert(httpreq.responseText);
+     }else{
+       alert("error");
+     }
+     }
+   }
+   httpreq.open('GET', "make")
+   httpreq.send();
+  }
+  document.getElementById("button").addEventListener("click", clickevent);
+})
+</script>  
+</body>
 </html>
